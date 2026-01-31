@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
         withCredentials: true,
       });
       if (data.success) {
-        console.log(data.tasks);
+        // console.log(data.tasks);
         setTasks(data.tasks);
       }
     } catch (error) {
@@ -40,9 +40,11 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    fetchUser();
-    fetchTasks();
-  }, []);
+    if (user) {
+      fetchUser();
+      fetchTasks();
+    }
+  }, [user]);
 
   return (
     <AuthContext.Provider
