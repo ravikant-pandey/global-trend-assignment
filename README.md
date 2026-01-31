@@ -1,7 +1,6 @@
 # 📝 Task Management Web Application  
 **GLOBAL TREND – Full Stack Development Internship Assignment**
 
----
 
 ## 📌 Project Overview
 
@@ -14,7 +13,6 @@ The project demonstrates:
 - **MongoDB** for persistent data storage
 - Clean architecture and best coding practices
 
----
 
 ## 🚀 Features
 
@@ -44,8 +42,6 @@ The project demonstrates:
 - MongoDB with Mongoose
 - Organized folder structure
 
----
-
 ## 🛠️ Tech Stack
 
 ### Frontend
@@ -66,8 +62,6 @@ The project demonstrates:
 - dotenv
 - cors
 - nodemon
-
----
 
 ## 1️⃣ Clone the Repository
 git clone https://github.com/ravikant-pandey/global-trend-assignment
