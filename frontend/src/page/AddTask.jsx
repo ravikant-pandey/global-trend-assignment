@@ -8,11 +8,15 @@ import { useNavigate } from "react-router-dom";
 function AddTask() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const { backendURL, fetchTasks } = useAuth();
+  const { backendURL, user, fetchTasks } = useAuth();
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    if (!user) {
+      toast.error("Please login first");
+      navigate("/login");
+      return;
+    }
     if (!title || !description) {
       toast.error("Please fill all fields");
       return;

@@ -9,6 +9,9 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [tasks, setTasks] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("isLoggedIn") === "true",
+  );
 
   // Fetch logged-in
   const fetchUser = async () => {
@@ -17,7 +20,10 @@ export const AuthProvider = ({ children }) => {
         withCredentials: true,
       });
       setUser(data.user);
-    } catch {
+    } catch (error) {
+      if (error.response?.status !== 401) {
+        console.error(error);
+      }
       setUser(null);
     } finally {
       setLoading(false);
@@ -40,9 +46,16 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (user) {
+    if (isLoggedIn) {
       fetchUser();
+    }
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    if (user) {
       fetchTasks();
+    } else {
+      setTasks([]);
     }
   }, [user]);
 
@@ -54,6 +67,8 @@ export const AuthProvider = ({ children }) => {
         fetchUser,
         loading,
         backendURL,
+        isLoggedIn,
+        setIsLoggedIn,
         tasks,
         setTasks,
         fetchTasks,

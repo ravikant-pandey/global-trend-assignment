@@ -29,11 +29,12 @@ function Auth() {
           { withCredentials: true },
         );
 
-        if (!data.success) return toast.error(data.message || "Login failed");
-
-        toast.success(data.message);
-        await fetchUser();
-        navigate("/");
+        if (data.success) {
+          toast.success(data.message);
+          localStorage.setItem("isLoggedIn", "true");
+          await fetchUser();
+          navigate("/");
+        }
       } else {
         const { data } = await axios.post(`${backendURL}/api/users/register`, {
           fullName,

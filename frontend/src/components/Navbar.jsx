@@ -20,6 +20,8 @@ const Navbar = () => {
       );
       if (data.success) {
         setUser(null);
+        localStorage.removeItem("isLoggedIn");
+        setOpen(false);
         toast.success(data.message);
         navigate("/");
       }
